@@ -1,16 +1,42 @@
-# habit_tracker
+# 🧘‍♂️ Habit Tracker
 
-A new Flutter project.
+A sleek and minimal Flutter application to help you develop life-changing habits. Track your consistency, visualize progress, and stay committed to your goals!
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+- 📅 **Heatmap Calendar**
+  - Easily see your streaks and progress over time.
+- ✅ **Habit List Management**
+  - Add, update, complete, and delete habits with swipe gestures.
+- 📦 **Offline Persistence**
+  - All data is stored locally using [Isar DB](https://isar.dev/).
+- 🎨 **Custom Theming**
+  - Designed with clean UI, dark/light support *(Coming Soon)*.
+- 🧠 **Daily Motivation**
+  - Boost productivity with motivational quotes *(Planned)*.
+- 🔔 **Smart Notifications**
+  - Set reminders to reinforce daily routines *(Coming Soon)*.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Built With
+
+- **Flutter** – Build once, deploy everywhere.
+- **Provider** – Lightweight, reactive state management.
+- **Isar** – Super fast NoSQL storage with queries, relationships & more.
+- **flutter_slidable** – Intuitive sliding list tiles.
+- **intl** – Internationalization and date formatting.
+- **flutter_heatmap_calendar** – GitHub-style calendar to track habits.
+
+---
+
+## 📲 Installation & Setup
+
+> Make sure you have Flutter installed. [Get started here](https://flutter.dev/docs/get-started/install).
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/habit_tracker.git
+   cd habit_tracker
