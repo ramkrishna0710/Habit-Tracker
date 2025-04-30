@@ -81,9 +81,22 @@ class MyHabitTile extends StatelessWidget {
               ),
               // checkbox
               leading: Checkbox(
-                activeColor: Colors.green,
+                // activeColor: Colors.green,
                 value: isCompleted,
                 onChanged: onChanged,
+                  side: MaterialStateBorderSide.resolveWith((Set<WidgetState> states) {
+                    if(isCompleted) {
+                      return BorderSide(color: Theme.of(context).colorScheme.tertiary, width: 2);
+                    } else {
+                      return BorderSide(color: Theme.of(context).colorScheme.outline, width: 2);
+                    }
+                  }),
+                  fillColor: MaterialStateProperty. resolveWith<Color>((Set<WidgetState> states) {
+                    if (!isCompleted) {
+                      return Theme.of(context).colorScheme.tertiary;
+                    }
+                    return Colors.green;
+                  })
               ),
             ),
           ),

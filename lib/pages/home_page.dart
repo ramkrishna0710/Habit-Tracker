@@ -82,64 +82,67 @@ class _HomePageState extends State<HomePage> {
     textEditingController.text = habit.name;
 
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          content: TextField(
-            controller: textEditingController,
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            content: TextField(controller: textEditingController),
+            actions: [
+              // save button
+              MaterialButton(
+                onPressed: () {
+                  //get the new habit name
+                  String newHabitName = textEditingController.text;
+                  // save to db
+                  context.read<HabitDatabase>().updateHabitName(
+                    habit.id,
+                    newHabitName,
+                  );
+                  // pop box
+                  Navigator.pop(context);
+                  // clear
+                  textEditingController.clear();
+                },
+                child: const Text('Save'),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // clear
+                  textEditingController.clear();
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
           ),
-          actions: [
-            // save button
-            MaterialButton(
-              onPressed: () {
-                //get the new habit name
-                String newHabitName = textEditingController.text;
-                // save to db
-                context.read<HabitDatabase>().updateHabitName(habit.id, newHabitName);
-                // pop box
-                Navigator.pop(context);
-                // clear
-                textEditingController.clear();
-              },
-              child: const Text('Save'),
-            ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.pop(context);
-                // clear
-                textEditingController.clear();
-              },
-              child: const Text("Cancel"),
-            ),
-          ],
-        )
     );
   }
 
   // delete habit box
   void deleteHabitBox(Habit habit) {
     showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text("Are you sure you want to delete?"),
-          actions: [
-            // save button
-            MaterialButton(
-              onPressed: () {
-                // save to db
-                context.read<HabitDatabase>().deleteHabit(habit.id);
-                // pop box
-                Navigator.pop(context);
-              },
-              child: const Text('Delete'),
-            ),
-            MaterialButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text("Cancel"),
-            ),
-          ],
-        )
+      context: context,
+      builder:
+          (context) => AlertDialog(
+            title: Text("Are you sure you want to delete?"),
+            actions: [
+              // save button
+              MaterialButton(
+                onPressed: () {
+                  // save to db
+                  context.read<HabitDatabase>().deleteHabit(habit.id);
+                  // pop box
+                  Navigator.pop(context);
+                },
+                child: const Text('Delete'),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Cancel"),
+              ),
+            ],
+          ),
     );
   }
 
@@ -159,7 +162,10 @@ class _HomePageState extends State<HomePage> {
         onPressed: createNewHabit,
         elevation: 0,
         backgroundColor: Theme.of(context).colorScheme.tertiary,
-        child: Icon(Icons.add, color: Theme.of(context).colorScheme.inversePrimary),
+        child: Icon(
+          Icons.add,
+          color: Theme.of(context).colorScheme.inversePrimary,
+        ),
       ),
       body: ListView(
         children: [
@@ -180,20 +186,20 @@ class _HomePageState extends State<HomePage> {
     List<Habit> currentHabits = habitDatabase.currentHabits;
     // return heat map UI
     return FutureBuilder<DateTime?>(
-        future: habitDatabase.getFirstLaunchDate(),
-        builder: (context, snapshot) {
-          // once the data is available -> build heatmap
-          if (snapshot.hasData) {
-            return MyHeatMap(
-                startDate: snapshot.data!,
-                datasets: prepHeatMapDataset(currentHabits),
-            );
-          }
-          // handle case where no data is returned
-          else {
-            return Container();
-          }
+      future: habitDatabase.getFirstLaunchDate(),
+      builder: (context, snapshot) {
+        // once the data is available -> build heatmap
+        if (snapshot.hasData) {
+          return MyHeatMap(
+            startDate: snapshot.data!,
+            datasets: prepHeatMapDataset(currentHabits),
+          );
         }
+        // handle case where no data is returned
+        else {
+          return Container();
+        }
+      },
     );
   }
 
